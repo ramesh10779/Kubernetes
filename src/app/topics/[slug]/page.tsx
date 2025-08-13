@@ -33,9 +33,3 @@ export default function ScenarioDetailPage({ params }: { params: { slug: string 
     </div>
   );
 }
-
-export async function generateStaticParams() {
-  return scenarios.map((scenario: Scenario) => ({
-    slug: scenario.slug,
-  }));
-}

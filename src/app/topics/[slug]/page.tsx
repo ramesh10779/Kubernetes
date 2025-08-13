@@ -5,9 +5,9 @@ import { scenarios } from "@/lib/scenarios";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-import { Scenario, PageProps } from "@/lib/types"; // Import PageProps
+import { Scenario } from "@/lib/types";
 
-export default function ScenarioDetailPage({ params }: PageProps<{ slug: string }>) {
+export default function ScenarioDetailPage({ params }: { params: { slug: string } }) {
   const scenario = scenarios.find((s: Scenario) => s.slug === params.slug);
 
   if (!scenario) {

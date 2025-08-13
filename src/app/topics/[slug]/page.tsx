@@ -9,9 +9,7 @@ import { Scenario } from "@/lib/types"; // Import the Scenario type
 
 // Define the PageProps interface for this dynamic route
 interface ScenarioDetailPageProps {
-  params: {
-    slug: string;
-  };
+  params: { [key: string]: string }; // Use a more general type for params
   searchParams?: { [key: string]: string | string[] | undefined };
 }
 

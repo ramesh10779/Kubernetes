@@ -45,3 +45,4 @@ export async function generateStaticParams() {
     slug: scenario.slug,
   }));
 }
+// This comment is added to force re-compilation and type regeneration.

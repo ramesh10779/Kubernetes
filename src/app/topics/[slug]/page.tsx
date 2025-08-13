@@ -5,16 +5,13 @@ import { scenarios } from "@/lib/scenarios";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-import { Scenario } from "@/lib/types"; // Import the Scenario type
+import { Scenario } from "@/lib/types";
 
-// Define the expected props type explicitly, including searchParams for full compatibility
-type ScenarioDetailPageProps = {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
+// The previous ScenarioDetailPageProps type was correct, but Next.js's build
+// system on Vercel seems to be misinterpreting it.
+// We'll directly type the params in the function signature as a workaround.
 
-// @ts-ignore: This is a workaround for a persistent Next.js type generation bug.
-export default function ScenarioDetailPage({ params }: ScenarioDetailPageProps) {
+export default function ScenarioDetailPage({ params }: { params: { slug: string } }) {
   const scenario = scenarios.find((s: Scenario) => s.slug === params.slug);
 
   if (!scenario) {

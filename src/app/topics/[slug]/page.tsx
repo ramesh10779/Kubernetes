@@ -7,7 +7,13 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Scenario } from "@/lib/types"; // Import the Scenario type
 
-export default function ScenarioDetailPage({ params }: { params: { slug: string } }) {
+// Define the expected props type explicitly
+type ScenarioDetailPageProps = {
+  params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
+
+export default function ScenarioDetailPage({ params }: ScenarioDetailPageProps) {
   const scenario = scenarios.find((s: Scenario) => s.slug === params.slug);
 
   if (!scenario) {

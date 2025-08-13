@@ -2,16 +2,17 @@ import Link from "next/link";
 import { MadeWithDyad } from "@/components/made-with-dyad";
 import { scenarios } from "@/lib/scenarios";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Scenario } from "@/lib/types"; // Import the Scenario type
 
 export default function Home() {
-  const groupedScenarios = scenarios.reduce((acc, scenario) => {
+  const groupedScenarios = scenarios.reduce((acc: Record<string, Scenario[]>, scenario: Scenario) => {
     const category = scenario.category || "Uncategorized";
     if (!acc[category]) {
       acc[category] = [];
     }
     acc[category].push(scenario);
     return acc;
-  }, {} as Record<string, typeof scenarios>);
+  }, {} as Record<string, Scenario[]>);
 
   return (
     <div className="grid grid-rows-[1fr_auto] items-center justify-items-center min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -22,7 +23,7 @@ export default function Home() {
           <div key={category} className="w-full">
             <h2 className="text-2xl font-semibold mb-4 text-center sm:text-left">{category}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {scenariosInCategory.map((scenario) => (
+              {scenariosInCategory.map((scenario: Scenario) => (
                 <Link key={scenario.slug} href={`/topics/${scenario.slug}`}>
                   <Card className="h-full flex flex-col hover:shadow-lg transition-shadow duration-200">
                     <CardHeader>

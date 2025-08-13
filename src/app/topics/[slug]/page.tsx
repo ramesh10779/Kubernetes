@@ -1,3 +1,5 @@
+"use client"; // Mark as a client component
+
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";

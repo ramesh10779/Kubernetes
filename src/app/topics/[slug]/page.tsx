@@ -5,13 +5,9 @@ import { scenarios } from "@/lib/scenarios";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-import { Scenario } from "@/lib/types";
+import { Scenario, PageProps } from "@/lib/types"; // Import PageProps
 
-// The previous ScenarioDetailPageProps type was correct, but Next.js's build
-// system on Vercel seems to be misinterpreting it.
-// We'll directly type the params in the function signature as a workaround.
-
-export default function ScenarioDetailPage({ params }: { params: { slug: string } }) {
+export default function ScenarioDetailPage({ params }: PageProps<{ slug: string }>) {
   const scenario = scenarios.find((s: Scenario) => s.slug === params.slug);
 
   if (!scenario) {

@@ -36,6 +36,7 @@ import { autoScalingSpikyWorkloads } from "./auto-scaling-spiky-workloads";
 import { costOptimizationEks } from "./cost-optimization-eks";
 import { disasterRecoveryMultiAzEks } from "./disaster-recovery-multi-az-eks";
 import { interviewReadyArchitectureMigrationBlueprint } from "./interview-ready-architecture-migration-blueprint";
+import { kubernetesArchitecture } from "./kubernetes-architecture"; // New import
 
 export const scenarios: Scenario[] = [
   controlPlaneOutOfSync,
@@ -74,4 +75,5 @@ export const scenarios: Scenario[] = [
   costOptimizationEks,
   disasterRecoveryMultiAzEks,
   interviewReadyArchitectureMigrationBlueprint,
+  kubernetesArchitecture, // New scenario added
 ];

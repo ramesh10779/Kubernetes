@@ -7,13 +7,7 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Scenario } from "@/lib/types"; // Import the Scenario type
 
-// Define the PageProps interface for this dynamic route
-interface ScenarioDetailPageProps {
-  params: { [key: string]: string }; // Use a more general type for params
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default function ScenarioDetailPage({ params }: ScenarioDetailPageProps) {
+export default function ScenarioDetailPage({ params }: { params: { slug: string } }) {
   const scenario = scenarios.find((s: Scenario) => s.slug === params.slug);
 
   if (!scenario) {
@@ -45,4 +39,3 @@ export async function generateStaticParams() {
     slug: scenario.slug,
   }));
 }
-// This comment is added to force re-compilation and type regeneration.

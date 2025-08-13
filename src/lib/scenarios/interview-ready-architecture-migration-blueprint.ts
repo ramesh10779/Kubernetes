@@ -215,7 +215,7 @@ resource "kubernetes_secret" "db_credentials" {
 |---------|-------------|--------------------|----------------|
 | **Network segmentation** | Private subnets, **Security Groups** | NetworkPolicy (Calico) | Define \`allow-from\` policies per namespace; default‑deny all. |
 | **Pod‑to‑AWS service auth** | **IRSA** (IAM Roles for Service Accounts) | ServiceAccount + \`aws-iam-authenticator\` | Each micro‑service gets its own IAM role (least privilege). |
-| **Encryption‑at‑rest** | **EBS‑encryption** with KMS‑CMK | \`encrypted: true\` in \`StorageClass\` | \`storageclass.yaml\` with \`parameters: { encrypted: "true", kmsKeyId: "\\\\${aws_kms_key.eks.id}" }\`. |
+| **Encryption‑at‑rest** | **EBS‑encryption** with KMS‑CMK | \`encrypted: true\` in \`StorageClass\` | \`storageclass.yaml\` with \`parameters: { encrypted: "true", kmsKeyId: "YOUR_KMS_KEY_ARN" }\`. |
 | **Encryption‑in‑transit** | **ALB TLS** + **ACM** certs | Istio mTLS (auto‑rotate) | Enable \`global.mtls.enabled = true\` in IstioOperator. |
 | **Audit logging** | **CloudTrail** + **EKS control‑plane logging** | \`audit\` log via \`--audit-policy-file\` | \`enable_cluster_logging = ["audit"]\` in the EKS module. |
 | **Runtime security** | **Amazon GuardDuty** | **OPA Gatekeeper** policies | Example policy enforcing \`runAsNonRoot: true\`. |

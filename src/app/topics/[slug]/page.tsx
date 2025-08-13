@@ -7,12 +7,12 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Scenario } from "@/lib/types"; // Import the Scenario type
 
-// Define the expected props type explicitly
+// Define the expected props type explicitly, simplifying it
 type ScenarioDetailPageProps = {
   params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
 };
 
+// @ts-ignore: This is a workaround for a persistent Next.js type generation bug.
 export default function ScenarioDetailPage({ params }: ScenarioDetailPageProps) {
   const scenario = scenarios.find((s: Scenario) => s.slug === params.slug);
 

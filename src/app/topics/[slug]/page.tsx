@@ -7,12 +7,6 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Scenario } from "@/lib/types";
 
-// Define the expected PageProps type where params is a Promise
-interface PageProps {
-  params: Promise<{ slug: string }>;
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
 // This function generates static paths for all scenarios
 export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
   return scenarios.map((scenario) => ({
@@ -20,10 +14,19 @@ export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
   }));
 }
 
-// Make the component async and await the params object
-export default async function ScenarioDetailPage({ params }: PageProps) {
-  // Await the params object to resolve the promise
-  const { slug } = await params;
+// Make the component async and await the params object, typing directly in the signature
+export default async function ScenarioDetailPage({ 
+  params, 
+  searchParams 
+}: { 
+  params: { slug: string }; 
+  searchParams?: { [key: string]: string | string[] | undefined }; 
+}) {
+  // No need to await params here if it's directly typed as { slug: string }
+  // If Next.js 15 truly passes a Promise, the previous code was correct.
+  // Let's revert to the previous understanding that params is a direct object.
+  // If the error persists, it might be a Next.js 15 specific behavior or bug.
+  const { slug } = params;
 
   const scenario = scenarios.find((s: Scenario) => s.slug === slug);
 

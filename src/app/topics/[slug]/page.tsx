@@ -12,6 +12,13 @@ interface ScenarioDetailPageProps {
   params: { slug: string };
 }
 
+// This function generates static paths for all scenarios
+export async function generateStaticParams() {
+  return scenarios.map((scenario) => ({
+    slug: scenario.slug,
+  }));
+}
+
 export default function ScenarioDetailPage({ params }: ScenarioDetailPageProps) {
   const scenario = scenarios.find((s: Scenario) => s.slug === params.slug);
 

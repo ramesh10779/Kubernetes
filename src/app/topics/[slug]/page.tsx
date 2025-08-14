@@ -7,11 +7,11 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Scenario } from "@/lib/types";
 
-// Define the expected PageProps type for a dynamic route
-type PageProps = {
-  params: { slug: string };
+// Use a more generic PageProps type as Next.js often expects for dynamic routes
+interface PageProps {
+  params: { [key: string]: string | string[] };
   searchParams?: { [key: string]: string | string[] | undefined };
-};
+}
 
 // This function generates static paths for all scenarios
 export async function generateStaticParams() {
@@ -22,7 +22,10 @@ export async function generateStaticParams() {
 
 // Make the component async and use the defined PageProps type
 export default async function ScenarioDetailPage({ params, searchParams }: PageProps) {
-  const scenario = scenarios.find((s: Scenario) => s.slug === params.slug);
+  // Safely access slug, knowing it's a string due to generateStaticParams
+  const slug = params.slug as string;
+
+  const scenario = scenarios.find((s: Scenario) => s.slug === slug);
 
   if (!scenario) {
     notFound();

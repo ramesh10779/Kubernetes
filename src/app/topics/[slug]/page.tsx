@@ -7,10 +7,11 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Scenario } from "@/lib/types";
 
-// Define the specific props for this page
-interface ScenarioDetailPageProps {
+// Define the expected PageProps type for a dynamic route
+type PageProps = {
   params: { slug: string };
-}
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
 
 // This function generates static paths for all scenarios
 export async function generateStaticParams() {
@@ -19,7 +20,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function ScenarioDetailPage({ params }: ScenarioDetailPageProps) {
+// Make the component async and use the defined PageProps type
+export default async function ScenarioDetailPage({ params, searchParams }: PageProps) {
   const scenario = scenarios.find((s: Scenario) => s.slug === params.slug);
 
   if (!scenario) {

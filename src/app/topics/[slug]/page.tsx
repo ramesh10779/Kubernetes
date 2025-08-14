@@ -19,11 +19,12 @@ export default async function ScenarioDetailPage({
   params, 
   searchParams 
 }: { 
-  params: Promise<{ slug: string }>; // Type params as a Promise
-  searchParams?: { [key: string]: string | string[] | undefined }; 
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined } | undefined>; 
 }) {
-  const resolvedParams = await params; // Await the params Promise
+  const resolvedParams = await params;
   const { slug } = resolvedParams;
+  const resolvedSearchParams = await searchParams; // Await searchParams
 
   const scenario = scenarios.find((s: Scenario) => s.slug === slug);
 

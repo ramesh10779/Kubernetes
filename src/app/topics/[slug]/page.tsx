@@ -7,10 +7,9 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Scenario } from "@/lib/types";
 
-// Define the expected PageProps type for a dynamic route
+// Define the expected PageProps type where params is a Promise
 interface PageProps {
-  params: { slug: string };
-  // searchParams is also part of PageProps, even if not explicitly used
+  params: Promise<{ slug: string }>;
   searchParams?: { [key: string]: string | string[] | undefined };
 }
 
@@ -21,9 +20,10 @@ export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
   }));
 }
 
-// Make the component async as it's a page component in App Router
+// Make the component async and await the params object
 export default async function ScenarioDetailPage({ params }: PageProps) {
-  const { slug } = params;
+  // Await the params object to resolve the promise
+  const { slug } = await params;
 
   const scenario = scenarios.find((s: Scenario) => s.slug === slug);
 

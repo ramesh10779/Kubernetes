@@ -19,14 +19,11 @@ export default async function ScenarioDetailPage({
   params, 
   searchParams 
 }: { 
-  params: { slug: string }; 
+  params: Promise<{ slug: string }>; // Type params as a Promise
   searchParams?: { [key: string]: string | string[] | undefined }; 
 }) {
-  // No need to await params here if it's directly typed as { slug: string }
-  // If Next.js 15 truly passes a Promise, the previous code was correct.
-  // Let's revert to the previous understanding that params is a direct object.
-  // If the error persists, it might be a Next.js 15 specific behavior or bug.
-  const { slug } = params;
+  const resolvedParams = await params; // Await the params Promise
+  const { slug } = resolvedParams;
 
   const scenario = scenarios.find((s: Scenario) => s.slug === slug);
 
